@@ -650,3 +650,18 @@ app.listen(PORT, () => {
   console.log(`   Santé → http://localhost:${PORT}/health`);
   console.log(`   Outils : 15 (dossiers, balance, grand livre, factures, trésorerie, GED)`);
 });
+
+// ─────────────────────────────────────────────
+// 7. KEEP-ALIVE — empêche la mise en veille Render
+// ─────────────────────────────────────────────
+
+const SELF_URL = process.env.RENDER_EXTERNAL_URL ?? `http://localhost:${PORT}`;
+
+setInterval(async () => {
+  try {
+    await fetch(`${SELF_URL}/health`);
+    console.log(`[keep-alive] ping OK — ${new Date().toISOString()}`);
+  } catch (err) {
+    console.warn(`[keep-alive] ping échoué : ${err.message}`);
+  }
+}, 4 * 60 * 1000); // toutes les 4 minutes
