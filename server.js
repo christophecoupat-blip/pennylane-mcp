@@ -140,7 +140,7 @@ Utiliser cet outil en premier pour obtenir les IDs des dossiers avant toute autr
       limit:  z.number().int().min(1).max(100).default(50),
     },
     async ({ page, limit }) => {
-      const data = await plFetch(`${${COMPANY_BASE}/companies`, { page, per_page: limit });
+      const data = await plFetch(`${COMPANY_BASE}/companies`, { page, per_page: limit });
       if (!data) return { content: [{ type: "text", text: "Aucun dossier trouvé." }] };
 
       const companies = data.companies ?? data.items ?? data.data ?? data ?? [];
