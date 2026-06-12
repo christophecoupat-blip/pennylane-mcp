@@ -143,7 +143,7 @@ Utiliser cet outil en premier pour obtenir les IDs des dossiers avant toute autr
       const data = await plFetch(`${${COMPANY_BASE}/companies`, { page, per_page: limit });
       if (!data) return { content: [{ type: "text", text: "Aucun dossier trouvé." }] };
 
-      const companies = data.companies ?? data.data ?? data ?? [];
+      const companies = data.companies ?? data.items ?? data.data ?? data ?? [];
       const total = data.total_pages ?? "?";
 
       if (!companies.length) return { content: [{ type: "text", text: "Aucun dossier client dans ce cabinet." }] };
