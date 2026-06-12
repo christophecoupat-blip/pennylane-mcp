@@ -140,7 +140,7 @@ Utiliser cet outil en premier pour obtenir les IDs des dossiers avant toute autr
       limit:  z.number().int().min(1).max(100).default(50),
     },
     async ({ page, limit }) => {
-      const data = await plFetch(`${FIRM_BASE}/companies`, { page, per_page: limit });
+      const data = await plFetch(`${${COMPANY_BASE}/companies`, { page, per_page: limit });
       if (!data) return { content: [{ type: "text", text: "Aucun dossier trouvé." }] };
 
       const companies = data.companies ?? data.data ?? data ?? [];
@@ -551,7 +551,7 @@ Retourne date, libellé, montant, compte, statut de rapprochement.`,
 Retourne nom, IBAN, solde, banque et statut de synchronisation.`,
     { company_id: z.number().int().positive() },
     async ({ company_id }) => {
-      const data = await plFetch(`${FIRM_BASE}/companies/${company_id}/bank_accounts`);
+      const data = await plFetch(`${COMPANY_BASE}/companies/${company_id}/bank_accounts`);
       if (!data) return { content: [{ type: "text", text: `Comptes bancaires introuvables pour le dossier ${company_id}.` }] };
 
       const accounts = data.bank_accounts ?? data.data ?? data ?? [];
